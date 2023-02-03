@@ -1,5 +1,8 @@
 import NotFound from "./pages/NotFound.vue";
 import LoginPage from "./pages/LoginPage.vue";
+import HintPage from "./pages/HintPage.vue";
+import AnswerPage from "./pages/AnswerPage.vue";
+import DialogPage from "./pages/DialogPage.vue";
 
 export const routes = [
   {
@@ -14,5 +17,17 @@ export const routes = [
   },
   {
     path: "/register",
+  },
+  {
+    path: "/hint/:levelId",
+    component: HintPage,
+  },
+  {
+    path: "/answer",
+    component: AnswerPage,
+  },
+  {
+    path: "/dialog",
+    component: DialogPage,
   },
 ];
