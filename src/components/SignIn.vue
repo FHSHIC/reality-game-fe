@@ -6,7 +6,7 @@
     <label for="email" class="">
       <p class="">Email</p>
       <input
-        v-model.trim="email"
+        v-model.trim="signInInfo.email"
         type="email"
         name=""
         id="email"
@@ -17,7 +17,7 @@
     <label for="password" class="">
       <p class="">密碼</p>
       <input
-        v-model="password"
+        v-model="signInInfo.password"
         type="password"
         name=""
         id="password"
@@ -34,12 +34,13 @@
 <script setup>
 import { reactive } from "vue";
 
-let email = "";
-let password = "";
+const signInInfo = {
+  email: "",
+  password: "",
+};
 
 function signInMethod() {
-  console.log(email);
-  console.log(password);
+  console.log(signInInfo);
 }
 </script>
 <style></style>
