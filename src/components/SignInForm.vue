@@ -1,6 +1,6 @@
 <template>
   <form
-    class="flex h-full w-full flex-col items-center justify-center gap-4 px-4 py-6"
+    class="flex h-full w-full flex-col items-center justify-center gap-4 px-4 py-2"
     @submit.prevent="signInMethod"
   >
     <label for="email" class="">
