@@ -3,6 +3,8 @@ import LoginPage from "./pages/LoginPage.vue";
 import HintPage from "./pages/HintPage.vue";
 import AnswerPage from "./pages/AnswerPage.vue";
 import DialogPage from "./pages/DialogPage.vue";
+import AsidePage from "./pages/AsidePage.vue";
+import StartPage from "./pages/StartPage.vue";
 
 export const routes = [
   {
@@ -29,5 +31,13 @@ export const routes = [
   {
     path: "/dialog",
     component: DialogPage,
+  },
+  {
+    path: "/aside",
+    component: AsidePage,
+  },
+  {
+    path: "/start",
+    component: StartPage,
   },
 ];
