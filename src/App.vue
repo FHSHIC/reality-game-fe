@@ -1,7 +1,7 @@
-<script setup></script>
+<script setup>
+import CreateAccount from "./pages/CreateAccount.vue";
+</script>
 
-<template>
-  <router-view></router-view>
-</template>
+<template><CreateAccount /></template>
 
 <style></style>
