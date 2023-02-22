@@ -1,5 +1,5 @@
 <script setup>
-import CreateAccount from "./pages/CreateAccount.vue";
+import CreateAccount from "./pages/Clearance.vue";
 </script>
 
 <template><CreateAccount /></template>

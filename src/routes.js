@@ -11,6 +11,7 @@ import HintChoicePage from "./pages/HintChoicePage.vue";
 import True from "./pages/True.vue";
 import False from "./pages/False.vue";
 import HintDetailPage from "./pages/HintDetailPage.vue";
+import Clearance from "./pages/Clearance.vue";
 
 import NotFound from "./pages/NotFound.vue";
 import LoginPage from "./pages/LoginPage.vue";
@@ -69,6 +70,10 @@ export const routes = [
   {
     path: "/HintDetail",
     component: HintDetailPage,
+  },
+  {
+    path: "/Clearance",
+    component: Clearance,
   },
 
   {
