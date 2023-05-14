@@ -9,43 +9,6 @@ import { fas } from "@fortawesome/free-solid-svg-icons";
 
 library.add(fas);
 
-document.body.addEventListener(
-  "touchmove",
-  function (event) {
-    // 获取触摸位置的变化
-    var touchChange = event.changedTouches[0];
-    var startX = touchChange.pageX;
-    var startY = touchChange.pageY;
-
-    // 在 touchstart 事件发生时记录起始位置
-    event.target.addEventListener(
-      "touchstart",
-      function (event) {
-        startX = event.touches[0].pageX;
-        startY = event.touches[0].pageY;
-      },
-      false
-    );
-
-    // 在 touchmove 事件发生时计算位置变化
-    event.target.addEventListener(
-      "touchmove",
-      function (event) {
-        var moveX = event.touches[0].pageX - startX;
-        var moveY = event.touches[0].pageY - startY;
-
-        // 如果 X 方向的移动大于 Y 方向，则阻止事件的默认行为
-        if (Math.abs(moveX) > Math.abs(moveY)) {
-          event.preventDefault();
-          event.stopPropagation();
-        }
-      },
-      false
-    );
-  },
-  false
-);
-
 history.pushState(null, null, location.href);
 window.onpopstate = function () {
   history.go(1);
