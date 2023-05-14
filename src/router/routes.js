@@ -7,6 +7,7 @@ import GameCodePage from "../page/GameCodePage.vue";
 import SetTeamNamePage from "../page/SetTeamNamePage.vue";
 import WaitingPlayerPage from "../page/WaitingPlayerPage.vue";
 import DialogPage from "../page/DialogPage.vue";
+import AnswerPage from "../page/AnswerPage.vue";
 
 export const routes = [
   {
@@ -40,6 +41,10 @@ export const routes = [
   {
     path: "/dialog",
     component: DialogPage,
+  },
+  {
+    path: "/answer",
+    component: AnswerPage,
   },
   {
     path: "/:pathMatch(.*)*",
