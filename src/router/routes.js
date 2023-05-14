@@ -10,6 +10,8 @@ import DialogPage from "../page/DialogPage.vue";
 import AnswerPage from "../page/AnswerPage.vue";
 import HintChoicePage from "../page/HintChoicePage.vue";
 import HintDetailPage from "../page/HintDetailPage.vue";
+import TruePage from "../page/TruePage.vue";
+import FalsePage from "../page/FalsePage.vue";
 
 export const routes = [
   {
@@ -55,6 +57,14 @@ export const routes = [
   {
     path: "/hint",
     component: HintDetailPage,
+  },
+  {
+    path: "/true",
+    component: TruePage,
+  },
+  {
+    path: "/false",
+    component: FalsePage,
   },
   {
     path: "/:pathMatch(.*)*",
