@@ -24,7 +24,7 @@ const goToNextScene = async () => {
 <template>
   <div class="h-full w-full overflow-hidden bg-[#ACDCCC]">
     <Gap />
-    <div class="flex h-[45vh] flex-col items-center justify-center">
+    <div class="flex flex-col items-center justify-center">
       <img :src="TruePng" alt="True" class="w-[70vw] max-w-[19rem]" />
       <div class="absolute bottom-28 space-y-10">
         <div class="rounded-[25px] border-4 border-[#87B5A6] bg-[#CDF2E6] p-10">
