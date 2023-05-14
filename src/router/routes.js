@@ -5,6 +5,7 @@ import RegistPage from "../page/RegistPage.vue";
 import CheckStatus from "../page/CheckStatus.vue";
 import GameCodePage from "../page/GameCodePage.vue";
 import SetTeamNamePage from "../page/SetTeamNamePage.vue";
+import WaitingPlayerPage from "../page/WaitingPlayerPage.vue";
 
 export const routes = [
   {
@@ -30,6 +31,10 @@ export const routes = [
   {
     path: "/set-team-name",
     component: SetTeamNamePage,
+  },
+  {
+    path: "/waiting",
+    component: WaitingPlayerPage,
   },
   {
     path: "/:pathMatch(.*)*",
