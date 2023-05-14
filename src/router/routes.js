@@ -12,6 +12,7 @@ import HintChoicePage from "../page/HintChoicePage.vue";
 import HintDetailPage from "../page/HintDetailPage.vue";
 import TruePage from "../page/TruePage.vue";
 import FalsePage from "../page/FalsePage.vue";
+import Clearance from "../page/Clearance.vue";
 
 export const routes = [
   {
@@ -65,6 +66,10 @@ export const routes = [
   {
     path: "/false",
     component: FalsePage,
+  },
+  {
+    path: "/clearance",
+    component: Clearance,
   },
   {
     path: "/:pathMatch(.*)*",
