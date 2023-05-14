@@ -2,7 +2,7 @@
 
 <template>
   <div
-    class="flex h-full w-full flex-col items-center justify-center bg-black/70"
+    class="flex h-full w-full flex-col items-center justify-center gap-4 bg-black/70"
   >
     <div class="lds-ellipsis">
       <div></div>
@@ -10,7 +10,7 @@
       <div></div>
       <div></div>
     </div>
-    <p class="text-xl text-white">正在檢查你的資料是否正確！</p>
+    <p class="text-xl text-white">正在檢查你的資料是否正確。</p>
     <p class="text-xl text-white">請保持您的網路通暢！</p>
   </div>
 </template>
