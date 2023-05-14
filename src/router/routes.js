@@ -6,6 +6,7 @@ import CheckStatus from "../page/CheckStatus.vue";
 import GameCodePage from "../page/GameCodePage.vue";
 import SetTeamNamePage from "../page/SetTeamNamePage.vue";
 import WaitingPlayerPage from "../page/WaitingPlayerPage.vue";
+import DialogPage from "../page/DialogPage.vue";
 
 export const routes = [
   {
@@ -35,6 +36,10 @@ export const routes = [
   {
     path: "/waiting",
     component: WaitingPlayerPage,
+  },
+  {
+    path: "/dialog",
+    component: DialogPage,
   },
   {
     path: "/:pathMatch(.*)*",

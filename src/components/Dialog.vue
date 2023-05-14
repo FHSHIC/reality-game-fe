@@ -1,6 +1,5 @@
 <script setup>
 import { defineProps } from "vue";
-import dialog_content_bg from "../assets/dialog_content_bg.png";
 
 const props = defineProps([
   "speakName",
@@ -11,7 +10,7 @@ const props = defineProps([
 </script>
 
 <template>
-  <div class="relative mx-auto w-screen py-4 px-6">
+  <div class="relative mx-auto w-screen px-6 py-4">
     <div
       class="dialog-content-bg relative max-h-32 overflow-auto bg-cover bg-center bg-no-repeat p-3 pt-5"
     >
