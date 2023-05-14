@@ -1,5 +1,9 @@
 <script setup></script>
 
-<template></template>
+<template>
+  <div class="h-mobile-screen w-screen bg-[#FFF3A8]">
+    <router-view></router-view>
+  </div>
+</template>
 
 <style></style>
