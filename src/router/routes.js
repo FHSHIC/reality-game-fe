@@ -2,6 +2,7 @@ import StartPage from "../page/StartPage.vue";
 import NotFoundPage from "../page/NotFoundPage.vue";
 import LoginPage from "../page/LoginPage.vue";
 import RegistPage from "../page/RegistPage.vue";
+import CheckStatus from "../page/CheckStatus.vue";
 
 export const routes = [
   {
@@ -15,6 +16,10 @@ export const routes = [
   {
     path: "/regist",
     component: RegistPage,
+  },
+  {
+    path: "/check",
+    component: CheckStatus,
   },
   {
     path: "/:pathMatch(.*)*",
