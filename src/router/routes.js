@@ -4,6 +4,7 @@ import LoginPage from "../page/LoginPage.vue";
 import RegistPage from "../page/RegistPage.vue";
 import CheckStatus from "../page/CheckStatus.vue";
 import GameCodePage from "../page/GameCodePage.vue";
+import SetTeamNamePage from "../page/SetTeamNamePage.vue";
 
 export const routes = [
   {
@@ -25,6 +26,10 @@ export const routes = [
   {
     path: "/gamecode",
     component: GameCodePage,
+  },
+  {
+    path: "/set-team-name",
+    component: SetTeamNamePage,
   },
   {
     path: "/:pathMatch(.*)*",
