@@ -24,6 +24,6 @@ const hintText = "測試文字測試文字測試文字測試文字測試文字�
 
 <style scoped>
 .bg-monkey {
-  background-image: url("../assets/monkey.png");
+  background-image: url("../assets/hint_background.png");
 }
 </style>
