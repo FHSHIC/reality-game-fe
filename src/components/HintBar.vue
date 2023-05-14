@@ -1,3 +1,9 @@
+<script setup>
+import { defineProps } from "vue";
+
+const props = defineProps(["hintContent"]);
+</script>
+
 <template>
   <input
     type="text"
@@ -6,8 +12,3 @@
     disabled
   />
 </template>
-<script setup>
-import { defineProps } from "vue";
-
-const props = defineProps(["hintContent"]);
-</script>

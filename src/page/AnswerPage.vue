@@ -16,10 +16,10 @@ const question = reactive({
 <template>
   <div class="h-full w-full bg-[#FFE0E6]">
     <div class="flex items-center justify-end gap-6 bg-[#F6C4C7] py-4 pr-6">
-      <router-link to="/answer">
+      <router-link to="/answer" replace>
         <img :src="PlotPng" alt="" class="w-10" />
       </router-link>
-      <router-link to="/answer">
+      <router-link to="/hints" replace>
         <img :src="HintPng" alt="" class="w-10" />
       </router-link>
     </div>

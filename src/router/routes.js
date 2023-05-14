@@ -8,6 +8,8 @@ import SetTeamNamePage from "../page/SetTeamNamePage.vue";
 import WaitingPlayerPage from "../page/WaitingPlayerPage.vue";
 import DialogPage from "../page/DialogPage.vue";
 import AnswerPage from "../page/AnswerPage.vue";
+import HintChoicePage from "../page/HintChoicePage.vue";
+import HintDetailPage from "../page/HintDetailPage.vue";
 
 export const routes = [
   {
@@ -45,6 +47,14 @@ export const routes = [
   {
     path: "/answer",
     component: AnswerPage,
+  },
+  {
+    path: "/hints",
+    component: HintChoicePage,
+  },
+  {
+    path: "/hint",
+    component: HintDetailPage,
   },
   {
     path: "/:pathMatch(.*)*",
