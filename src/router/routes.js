@@ -1,8 +1,11 @@
+import IndexPage from "../page/IndexPage.vue";
 import StartPage from "../page/StartPage.vue";
 import NotFoundPage from "../page/NotFoundPage.vue";
 import LoginPage from "../page/LoginPage.vue";
 import RegistPage from "../page/RegistPage.vue";
-import CheckStatus from "../page/CheckStatus.vue";
+import CheckDramaStatus from "../page/CheckDramaStatus.vue";
+import CheckUserStatus from "../page/CheckUserStatus.vue";
+import CheckTeamStatus from "../page/CheckTeamStatus.vue";
 import GameCodePage from "../page/GameCodePage.vue";
 import SetTeamNamePage from "../page/SetTeamNamePage.vue";
 import WaitingPlayerPage from "../page/WaitingPlayerPage.vue";
@@ -14,9 +17,31 @@ import TruePage from "../page/TruePage.vue";
 import FalsePage from "../page/FalsePage.vue";
 import Clearance from "../page/Clearance.vue";
 
+import Clear from "../page/Clear.vue";
+
 export const routes = [
   {
     path: "/",
+    component: IndexPage,
+  },
+  {
+    path: "/clear",
+    component: Clear,
+  },
+  {
+    path: "/check-drama",
+    component: CheckDramaStatus,
+  },
+  {
+    path: "/check-user",
+    component: CheckUserStatus,
+  },
+  {
+    path: "/check-team/:gamecode",
+    component: CheckTeamStatus,
+  },
+  {
+    path: "/start",
     component: StartPage,
   },
   {
@@ -27,10 +52,7 @@ export const routes = [
     path: "/regist",
     component: RegistPage,
   },
-  {
-    path: "/check",
-    component: CheckStatus,
-  },
+
   {
     path: "/gamecode",
     component: GameCodePage,

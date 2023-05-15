@@ -20,7 +20,7 @@ import congratulation from "../assets/Congratulation.png";
       </div>
       <div class="flex justify-center">
         <div class="absolute top-[500px]">
-          <router-link to="/">
+          <router-link to="/start">
             <Botton text="繼續" class="" BackgroundColor="#F6C4C7" @click="" />
           </router-link>
         </div>

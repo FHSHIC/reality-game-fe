@@ -1,5 +1,7 @@
 <script setup>
 import { reactive } from "vue";
+import { loginProcess } from "../utils/api.js";
+
 import InputArea from "../components/InputArea.vue";
 import SakuraButton from "../components/SakuraButton.vue";
 import ReturnPrev from "../components/ReturnPrev.vue";
@@ -9,7 +11,7 @@ import mail from "../assets/email.png";
 import loginlogo from "../assets/loginlogo.png";
 
 const login = reactive({
-  account: "",
+  email: "",
   password: "",
 });
 </script>
@@ -25,7 +27,7 @@ const login = reactive({
         <InputArea
           type="email"
           :img="mail"
-          v-model="login.account"
+          v-model="login.email"
           placeholder="請輸入您的 E-mail"
         />
       </div>
@@ -36,7 +38,9 @@ const login = reactive({
         placeholder="請輸入您的密碼"
       />
       <div class="flex flex-col items-center justify-center gap-6">
-        <SakuraButton> 登入帳號 </SakuraButton>
+        <SakuraButton @click="loginProcess(login.email, login.password)">
+          登入帳號
+        </SakuraButton>
         <router-link to="/regist" replace>
           <p class="text-center text-sm text-sky-600 underline">
             還沒有帳號嗎？點這註冊！
@@ -45,5 +49,5 @@ const login = reactive({
       </div>
     </form>
   </div>
-  <ReturnPrev to="/" />
+  <!-- <ReturnPrev to="/" /> -->
 </template>

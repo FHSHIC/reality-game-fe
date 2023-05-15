@@ -1,17 +1,29 @@
-<script setup></script>
+<script setup>
+import { useRoute } from "vue-router";
+import { checkTeamStatusProcess } from "../utils/api.js";
+
+const route = useRoute();
+const gamecode = route.params.gamecode;
+
+setTimeout(() => {
+  checkTeamStatusProcess(gamecode);
+}, 500);
+</script>
 
 <template>
-  <div
-    class="flex h-full w-full flex-col items-center justify-center gap-4 bg-black/70"
-  >
-    <div class="lds-ellipsis">
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
+  <div class="monkey_background h-full w-full bg-cover">
+    <div
+      class="flex h-full w-full flex-col items-center justify-center gap-4 bg-black/70"
+    >
+      <div class="lds-ellipsis">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <p class="text-xl text-white">正在檢查您的團隊資料......</p>
+      <p class="text-xl text-white">請保持您的網路通暢！</p>
     </div>
-    <p class="text-xl text-white">正在檢查你的資料是否正確。</p>
-    <p class="text-xl text-white">請保持您的網路通暢！</p>
   </div>
 </template>
 
@@ -70,5 +82,9 @@
   100% {
     transform: translate(24px, 0);
   }
+}
+
+.monkey_background {
+  background-image: url("../assets/hint_background.png");
 }
 </style>
