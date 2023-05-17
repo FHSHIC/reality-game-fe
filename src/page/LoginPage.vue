@@ -1,6 +1,6 @@
 <script setup>
 import { reactive } from "vue";
-import { loginProcess } from "../utils/api.js";
+import { loginProcess } from "../utils/process.js";
 
 import InputArea from "../components/InputArea.vue";
 import SakuraButton from "../components/SakuraButton.vue";

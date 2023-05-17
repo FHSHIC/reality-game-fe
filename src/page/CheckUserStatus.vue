@@ -1,7 +1,17 @@
 <script setup>
-import { checkUserProcess } from "../utils/api.js";
+import { useRouter } from "vue-router";
+import { getCurrentUserProcess } from "../utils/process.js";
+import { getUserStatusFromStorage } from "../utils/status.js";
 
-setTimeout(checkUserProcess, 500);
+const router = useRouter();
+
+setTimeout(async () => {
+  if (!getUserStatusFromStorage) {
+    router.replace("/login");
+    return;
+  }
+  await getCurrentUserProcess();
+}, 500);
 </script>
 
 <template>

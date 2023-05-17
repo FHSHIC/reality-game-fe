@@ -1,6 +1,8 @@
 <script setup>
 import { reactive } from "vue";
 import { useRouter } from "vue-router";
+import { getTeamStatusFromStorage } from "../utils/status.js";
+import { getTeamStatusProcess } from "../utils/process";
 
 import TruePng from "../assets/true.png";
 
@@ -9,14 +11,11 @@ import Gap from "../components/Gap.vue";
 
 const router = useRouter();
 
+getTeamStatusProcess(getTeamStatusFromStorage().gamecode, false);
+
 const goToNextScene = async () => {
   router.replace({
-    path: "/dialog",
-    query: {
-      nowDramaId: "",
-      counter: 0,
-      nowScene: 1,
-    },
+    path: `/dialog/${getTeamStatusFromStorage().nowLevel}/1/0`,
   });
 };
 </script>

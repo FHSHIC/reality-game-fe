@@ -1,5 +1,7 @@
 <script setup>
 import { reactive } from "vue";
+import { getTeamStatusFromStorage } from "../utils/status";
+
 import Gap from "../components/Gap.vue";
 import HintChoice from "../components/HintChoice.vue";
 import ReturnPrev from "../components/ReturnPrev.vue";
@@ -14,7 +16,7 @@ const mockdata = {
   <div class="bg-FuxingSlope h-full w-full bg-cover bg-center bg-no-repeat">
     <Gap gap-height="1rem" />
     <p class="pb-6 pt-10 text-center text-[55px] font-extrabold text-[#FFF4EA]">
-      第 {{ mockdata.level }} 關提示
+      第 {{ getTeamStatusFromStorage().nowLevel }} 關提示
     </p>
     <div class="flex items-center justify-center pt-10">
       <div class="flex flex-col items-center gap-5">

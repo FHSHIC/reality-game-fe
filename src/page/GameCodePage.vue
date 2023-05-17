@@ -1,10 +1,13 @@
 <script setup>
 import { reactive } from "vue";
-import CloseEyesSmile from "../assets/CloseEyesSmile.png";
+import { useGameCodeProcess } from "../utils/process";
+
 import Botton from "../components/Botton.vue";
 import InputArea from "../components/InputArea.vue";
 import Gap from "../components/Gap.vue";
 import ReturnPrev from "../components/ReturnPrev.vue";
+
+import CloseEyesSmile from "../assets/CloseEyesSmile.png";
 
 const game = reactive({
   code: "",
@@ -32,7 +35,11 @@ const game = reactive({
       請從袋中拿出卡片輸入遊戲序號
     </p>
     <div class="flex justify-center">
-      <Botton text="進入隊伍" BackgroundColor="#F6C4C7" @click="" />
+      <Botton
+        text="進入隊伍"
+        BackgroundColor="#F6C4C7"
+        @click="useGameCodeProcess(game.code)"
+      />
     </div>
   </div>
   <ReturnPrev to="/" />

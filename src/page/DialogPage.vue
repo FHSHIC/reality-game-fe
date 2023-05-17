@@ -1,21 +1,76 @@
 <script setup>
-import { reactive } from "vue";
+import { reactive, onBeforeMount, onErrorCaptured } from "vue";
+import { useRoute, useRouter } from "vue-router";
+import { getDramaContentFromIndexedDB } from "../utils/status.js";
+import { changeDialogProcess } from "../utils/process.js";
 
 import FullPageTextDialog from "../components/FullPageTextDialog.vue";
 import PersonDialog from "../components/PersonDialog.vue";
 
 import girl from "../test_assets/girl01.png";
 
+const route = useRoute();
+const router = useRouter();
+
 const dramaStatus = reactive({
-  data: {
-    level: 1,
-  },
+  level: route.params.level,
+  dramaSeq: route.params.dramaSeq,
+  dialogSeq: route.params.dialogSeq,
 });
 
-const speak = reactive({
-  speaker: "曉夢",
-  speach:
-    "測試文字測試文字測試文字測試文字測試文字測試文字測試文字測試文字測試文字",
+const dialogSpeak = reactive({
+  speaker: "",
+  speach: "",
+  speakerImg: "",
+  isAllPage: false,
+});
+
+onBeforeMount(async () => {
+  const dramaContent = await getDramaContentFromIndexedDB(dramaStatus.level);
+
+  dialogSpeak.speaker =
+    dramaContent.dramas[dramaStatus.dramaSeq][dramaStatus.dialogSeq].speaker;
+  dialogSpeak.speach =
+    dramaContent.dramas[dramaStatus.dramaSeq][dramaStatus.dialogSeq].speach;
+  dialogSpeak.speakerImg =
+    dramaContent.dramas[dramaStatus.dramaSeq][dramaStatus.dialogSeq].speakerImg;
+  if (
+    dramaContent.dramas[dramaStatus.dramaSeq][dramaStatus.dialogSeq].speaker ===
+      "引導話" ||
+    dramaContent.dramas[dramaStatus.dramaSeq][dramaStatus.dialogSeq].speaker ===
+      "旁白"
+  ) {
+    dialogSpeak["isAllPage"] = true;
+  } else {
+    dialogSpeak["isAllPage"] = false;
+  }
+});
+
+onErrorCaptured(async () => {
+  if (dramaStatus.level === 5 && dramaStatus.dramaSeq === 1) {
+    try {
+      const res = await req.post(
+        `/team/resolve-beacon`,
+        {
+          teamId: getTeamStatusFromStorage()["gamecode"],
+          beacon: getTeamStatusFromStorage()["beacon"],
+        },
+        {
+          headers: {
+            "access-token": getUserStatusFromStorage().accessToken,
+          },
+        }
+      );
+      updateTeamStatusToStorage(res.data);
+
+      router.replace({
+        path: `/dialog/${getTeamStatusFromStorage().nowLevel}/0/0`,
+      });
+    } catch (e) {
+      console.log(e);
+      alert("你並沒有順利闖關喔！");
+    }
+  }
 });
 </script>
 
@@ -23,25 +78,24 @@ const speak = reactive({
   <div
     class="h-full w-full bg-cover bg-center bg-no-repeat"
     :class="{
-      'puzzle-bg01': dramaStatus.data.level === 1,
-      'puzzle-bg02': dramaStatus.data.level === 2,
-      'puzzle-bg03': dramaStatus.data.level === 3,
-      'puzzle-bg04': dramaStatus.data.level === 4,
-      'puzzle-bg05':
-        dramaStatus.data.level === 5 &&
-        nowSceneStatus.counter !== dramaStatus.data.dramas.length - 1 &&
-        nowSceneStatus.nowScene !== 1,
-      'last-image':
-        dramaStatus.data.level === 5 &&
-        nowSceneStatus.counter === dramaStatus.data.dramas.length - 1 &&
-        nowSceneStatus.nowScene === 1,
+      'puzzle-bg01': dramaStatus.level === '1',
+      'puzzle-bg02': dramaStatus.level === '2',
+      'puzzle-bg03': dramaStatus.level === '3',
+      'puzzle-bg04': dramaStatus.level === '4',
+      'puzzle-bg05': dramaStatus.level === '5',
+      'last-image': dramaStatus.level === '6',
     }"
+    @click="changeDialogProcess(dramaStatus.dramaSeq, dramaStatus.dialogSeq)"
   >
-    <FullPageTextDialog text="測試文字測試文字測試文字" />
+    <FullPageTextDialog
+      :text="dialogSpeak.speach"
+      v-if="dialogSpeak.isAllPage"
+    />
     <PersonDialog
-      :image="girl"
-      :speaker="speak.speaker"
-      :speach="speak.speach"
+      :image="dialogSpeak.speakerImg"
+      :speaker="dialogSpeak.speaker.split('(')[0]"
+      :speach="dialogSpeak.speach"
+      v-if="!dialogSpeak.isAllPage"
     />
   </div>
 </template>

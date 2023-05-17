@@ -1,42 +1,53 @@
 <script setup>
 import { onMounted } from "vue";
 import { useRouter } from "vue-router";
-import { getDrama } from "../utils/api.js";
-import { checkExist } from "../utils/dramaDB.js";
+import { getDrama } from "../utils/process.js";
+import { getTeamStatusFromStorage } from "../utils/status";
 
 const router = useRouter();
 
-getDrama();
+// getDrama();
 
 onMounted(async () => {
-  const levelKeys = [
-    "level1",
-    "level2",
-    "level3",
-    "level4",
-    "level5",
-    "level6",
-  ];
-
-  let allSet = true;
-
-  levelKeys.forEach(async (levelKey) => {
-    const exist = await checkExist(levelKey);
-    if (!exist) {
-      allSet = false;
-      return;
-    }
-  });
-
-  if (!allSet) {
-    getDrama().then(() => {
-      router.replace("/login");
-    });
-  } else {
+  getDrama().then(() => {
     setTimeout(() => {
-      router.replace("/check-user");
-    }, 1000);
-  }
+      router.replace({
+        path: `/dialog/${getTeamStatusFromStorage().nowLevel}/0/0`,
+      });
+    }, 500);
+  });
+  // const levelKeys = [
+  //   "level1",
+  //   "level2",
+  //   "level3",
+  //   "level4",
+  //   "level5",
+  //   "level6",
+  // ];
+  // let allSet = true;
+  // levelKeys.forEach(async (levelKey) => {
+  //   const exist = await checkExist(levelKey);
+  //   if (!exist) {
+  //     allSet = false;
+  //     return;
+  //   }
+  // });
+  // if (!allSet) {
+  //   getDrama().then(() => {
+  //     router.replace("/login");
+  //   });
+  // } else {
+  //   setTimeout(() => {
+  //     router.replace({
+  //       path: "/dialog",
+  //       query: {
+  //         level: 1,
+  //         dramaSeq: 0,
+  //         dialogSeq: 0,
+  //       },
+  //     });
+  //   }, 500);
+  // }
 });
 </script>
 

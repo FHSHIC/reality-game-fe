@@ -1,5 +1,8 @@
 <script setup>
 import { reactive } from "vue";
+import { setTeamNameProcess } from "../utils/process";
+import { getTeamStatusFromStorage } from "../utils/status";
+
 import CloseEyesSmile from "../assets/CloseEyesSmile.png";
 import Botton from "../components/Botton.vue";
 import InputArea from "../components/InputArea.vue";
@@ -8,6 +11,7 @@ import ReturnPrev from "../components/ReturnPrev.vue";
 
 const team = reactive({
   name: "",
+  gamecode: getTeamStatusFromStorage().gamecode,
 });
 </script>
 
@@ -28,7 +32,11 @@ const team = reactive({
       恭喜你擔任隊長，幫大家取個名字吧！
     </p>
     <div class="flex justify-center">
-      <Botton text="進入隊伍" BackgroundColor="#F6C4C7" @click="" />
+      <Botton
+        text="進入隊伍"
+        BackgroundColor="#F6C4C7"
+        @click="setTeamNameProcess(team.gamecode, team.name)"
+      />
     </div>
   </div>
 </template>

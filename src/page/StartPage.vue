@@ -1,5 +1,5 @@
 <script setup>
-import { logoutProcess } from "../utils/api";
+import { logoutProcess, toGameProcess } from "../utils/process.js";
 
 import titlePng from "../assets/Title.png";
 import monkeyPng from "../assets/monkey.png";
@@ -15,9 +15,7 @@ import SakuraButton from "../components/SakuraButton.vue";
       </div>
     </div>
     <div class="flex flex-col items-center justify-center gap-6 pt-6">
-      <router-link to="/gamecode">
-        <SakuraButton>開始遊戲</SakuraButton>
-      </router-link>
+      <SakuraButton @click="toGameProcess">開始遊戲</SakuraButton>
       <router-link to="/review" v-if="false">
         <SakuraButton>回顧</SakuraButton>
       </router-link>

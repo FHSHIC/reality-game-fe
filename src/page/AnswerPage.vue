@@ -1,5 +1,7 @@
 <script setup>
 import { reactive } from "vue";
+import { getTeamStatusFromStorage } from "../utils/status";
+import { checkAnswerProcess } from "../utils/process";
 
 import Botton from "../components/Botton.vue";
 import PlotPng from "../assets/plot.png";
@@ -16,7 +18,10 @@ const question = reactive({
 <template>
   <div class="h-full w-full bg-[#FFE0E6]">
     <div class="flex items-center justify-end gap-6 bg-[#F6C4C7] py-4 pr-6">
-      <router-link to="/dialog" replace>
+      <router-link
+        :to="`/dialog/${getTeamStatusFromStorage().nowLevel}/0/0`"
+        replace
+      >
         <img :src="PlotPng" alt="" class="w-10" />
       </router-link>
       <router-link to="/hints" replace>
@@ -44,6 +49,7 @@ const question = reactive({
         text="送出"
         class="mx-auto rounded-[30px]"
         :style="`background-color: #F6C4C7`"
+        @click="checkAnswerProcess(question.answer)"
       />
     </div>
   </div>

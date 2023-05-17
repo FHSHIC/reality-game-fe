@@ -6,6 +6,7 @@ import RegistPage from "../page/RegistPage.vue";
 import CheckDramaStatus from "../page/CheckDramaStatus.vue";
 import CheckUserStatus from "../page/CheckUserStatus.vue";
 import CheckTeamStatus from "../page/CheckTeamStatus.vue";
+import CheckGameEndStatus from "../page/CheckGameEndStatus.vue";
 import GameCodePage from "../page/GameCodePage.vue";
 import SetTeamNamePage from "../page/SetTeamNamePage.vue";
 import WaitingPlayerPage from "../page/WaitingPlayerPage.vue";
@@ -41,6 +42,10 @@ export const routes = [
     component: CheckTeamStatus,
   },
   {
+    path: "/check-game-end",
+    component: CheckGameEndStatus,
+  },
+  {
     path: "/start",
     component: StartPage,
   },
@@ -66,7 +71,7 @@ export const routes = [
     component: WaitingPlayerPage,
   },
   {
-    path: "/dialog",
+    path: "/dialog/:level/:dramaSeq/:dialogSeq",
     component: DialogPage,
   },
   {
@@ -95,6 +100,6 @@ export const routes = [
   },
   {
     path: "/:pathMatch(.*)*",
-    components: { default: NotFoundPage },
+    redirect: "/",
   },
 ];

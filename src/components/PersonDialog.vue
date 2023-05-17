@@ -6,7 +6,7 @@ const props = defineProps(["image", "speaker", "speach"]);
 
 <template>
   <div class="relative h-full w-full">
-    <img :src="props.image" alt="登場人物" class="w-full pt-32" />
+    <img :src="props.image" class="w-full pt-32" />
     <div class="absolute bottom-16">
       <Dialog :speak-content="props.speach" :speak-name="props.speaker" />
     </div>
