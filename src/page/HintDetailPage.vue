@@ -1,7 +1,27 @@
 <script setup>
+import { reactive, onMounted } from "vue";
+import { useRoute } from "vue-router";
+import { getHintByIdFromStorage } from "../utils/status.js";
+
 import Botton from "../components/Botton.vue";
 
-const hintText = "測試文字測試文字測試文字測試文字測試文字測試文字";
+const route = useRoute();
+
+let intervalId;
+
+const hint = reactive({
+  text: "",
+});
+
+onMounted(() => {
+  intervalId = setInterval(() => {
+    const hintContent = getHintByIdFromStorage(route.params.hintId);
+    hint.text = hintContent;
+    if (hint.text) {
+      clearInterval(intervalId);
+    }
+  }, 100);
+});
 </script>
 
 <template>
@@ -13,7 +33,7 @@ const hintText = "測試文字測試文字測試文字測試文字測試文字�
     >
       <p class="text-center text-2xl font-bold text-white">提示</p>
       <p class="text-center indent-2 text-lg text-white">
-        {{ hintText }}
+        {{ hint.text }}
       </p>
       <router-link to="/hints">
         <Botton text="確認" BackgroundColor="#D9D9D9" />

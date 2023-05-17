@@ -1,7 +1,7 @@
 <script setup>
 import { reactive } from "vue";
 import { getTeamStatusFromStorage } from "../utils/status";
-import { checkAnswerProcess } from "../utils/process";
+import { checkAnswerProcess, getLevelContentProcess } from "../utils/process";
 
 import Botton from "../components/Botton.vue";
 import PlotPng from "../assets/plot.png";
@@ -9,6 +9,8 @@ import HintPng from "../assets/hint.png";
 import LockPng from "../assets/lock.png";
 import AnswerPng from "../assets/answer.png";
 import InputArea from "../components/InputArea.vue";
+
+getLevelContentProcess();
 
 const question = reactive({
   answer: "",

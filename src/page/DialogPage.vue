@@ -1,5 +1,5 @@
 <script setup>
-import { reactive, onBeforeMount, onErrorCaptured } from "vue";
+import { reactive, onBeforeMount, onMounted, onErrorCaptured } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { getDramaContentFromIndexedDB } from "../utils/status.js";
 import { changeDialogProcess } from "../utils/process.js";
@@ -25,7 +25,7 @@ const dialogSpeak = reactive({
   isAllPage: false,
 });
 
-onBeforeMount(async () => {
+onMounted(async () => {
   const dramaContent = await getDramaContentFromIndexedDB(dramaStatus.level);
 
   dialogSpeak.speaker =
@@ -46,7 +46,8 @@ onBeforeMount(async () => {
   }
 });
 
-onErrorCaptured(async () => {
+onErrorCaptured(async (e) => {
+  console.log(e);
   if (dramaStatus.level === 5 && dramaStatus.dramaSeq === 1) {
     try {
       const res = await req.post(

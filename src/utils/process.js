@@ -10,6 +10,10 @@ import {
   delTeamStatusFromStorage,
   waitStatus,
   getDramaContentFromIndexedDB,
+  updateLevelStatusToStorage,
+  updateAllHintGotToStorage,
+  updateHintByIdToStorage,
+  clearHintFromStorage,
 } from "./status.js";
 
 const req = axios.create({
@@ -82,7 +86,7 @@ export const registProcess = async (email, username, password) => {
   router.push("/start");
 };
 
-export const getCurrentUserProcess = async () => {
+export const getCurrentUserProcess = async (onlyUpdate = false) => {
   //TODO: check user
   const userStatusFromStorage = getUserStatusFromStorage();
   if (!userStatusFromStorage) {
@@ -97,7 +101,9 @@ export const getCurrentUserProcess = async () => {
       },
     });
     updateUserStatusToStorage(res.data);
-    router.replace("/start");
+    if (!onlyUpdate) {
+      router.replace("/start");
+    }
     return;
   } catch (e) {
     // onfailure
@@ -312,13 +318,13 @@ export const toGameSettlement = () => {
 
 export const gameEndProcess = async () => {
   // TODO: end game and set final time
-  teamStatus = getTeamStatusFromStorage();
-  userStatus = getUserStatusFromStorage();
+  const teamStatus = getTeamStatusFromStorage();
+  const userStatus = getUserStatusFromStorage();
   try {
     await req.post(
       "/team/game-finish",
       {
-        gamcode: teamStatus.gamecode,
+        gamecode: teamStatus.gamecode,
       },
       {
         headers: {
@@ -326,8 +332,17 @@ export const gameEndProcess = async () => {
         },
       }
     );
+    router.replace({
+      path: "/check-game-end",
+    });
   } catch (e) {
     console.log(e);
+    const errorRes = e.response;
+    if (errorRes.status === 406) {
+      alert("隊員還沒到齊，還不能結算喔！");
+    } else {
+      alert("出了一點小差錯，請詢問山城實境解謎團隊！");
+    }
   }
   // 不需要額外的 redirect，在 websocket 有設定了
 };
@@ -335,6 +350,9 @@ export const gameEndProcess = async () => {
 export const clearanceProcess = () => {
   // TODO: clear drama db
   // update team state, update user game history
+  clear(customStore);
+  getCurrentUserProcess(true);
+  delTeamStatusFromStorage();
   // onsuccess
   router.replace({
     path: "/start",
@@ -400,15 +418,48 @@ export const changeDialogProcess = async (dramaSeq, dialogSeq) => {
       });
     } catch (e) {
       console.log(e);
-      alert("你並沒有順利闖關喔！");
+      alert("似乎出了點問題！麻煩跟山城實境解謎團隊聯繫。");
     }
   } else {
     router.replace("/answer");
   }
 };
 
-export const getHintProcess = (hintId) => {
+export const getHintProcess = async (hintId) => {
   // TODO: get hint detail
+  const userStatus = getUserStatusFromStorage();
+  const teamStatus = getTeamStatusFromStorage();
+  try {
+    const res = await req.get(
+      `/hint/get-hint/${hintId}/${teamStatus.gamecode}`,
+      {
+        headers: {
+          "access-token": userStatus.accessToken,
+        },
+      }
+    );
+    updateAllHintGotToStorage(hintId);
+    updateHintByIdToStorage(hintId, res.data.hintContent);
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const getLevelAnswerProcess = async () => {
+  // TODO: get level Answer
+  const userStatus = getUserStatusFromStorage();
+  const teamStatus = getTeamStatusFromStorage();
+  try {
+    const res = await req.get(`/hint/level-answer/${teamStatus.gamecode}`, {
+      headers: {
+        "access-token": userStatus.accessToken,
+      },
+    });
+    updateAllHintGotToStorage("level-answer");
+    updateHintByIdToStorage("level-answer", res.data.hintContent);
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 export const checkAnswerProcess = async (answer) => {
@@ -433,6 +484,7 @@ export const checkAnswerProcess = async (answer) => {
     );
 
     if (res.data.beacon) {
+      clearHintFromStorage();
       router.replace({
         path: `/true`,
       });
@@ -441,6 +493,23 @@ export const checkAnswerProcess = async (answer) => {
         path: "/false",
       });
     }
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const getLevelContentProcess = async () => {
+  const userStatus = getUserStatusFromStorage();
+  const teamStatus = getTeamStatusFromStorage();
+  const dramaContent = await getDramaContentFromIndexedDB(teamStatus.nowLevel);
+
+  try {
+    const res = await req.get(`/level/${dramaContent.levelId}`, {
+      headers: {
+        "access-token": userStatus.accessToken,
+      },
+    });
+    updateLevelStatusToStorage(res.data);
   } catch (e) {
     console.log(e);
   }

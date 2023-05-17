@@ -1,15 +1,37 @@
 <script setup>
 import { reactive } from "vue";
-import { getTeamStatusFromStorage } from "../utils/status";
+import { useRouter, onBeforeRouteLeave } from "vue-router";
+import {
+  getTeamStatusFromStorage,
+  getLevelStatusFromStorage,
+} from "../utils/status";
+import { getHintProcess, getLevelAnswerProcess } from "../utils/process.js";
 
 import Gap from "../components/Gap.vue";
 import HintChoice from "../components/HintChoice.vue";
 import ReturnPrev from "../components/ReturnPrev.vue";
 
-const mockdata = {
-  level: 1,
-  hints: ["123", "456", "789"],
-};
+const router = useRouter();
+
+const levelStatus = getLevelStatusFromStorage();
+
+onBeforeRouteLeave((to, from) => {
+  if (to.fullPath === "/answer") {
+    return true;
+  }
+  if (to.params.hintId === "level-answer") {
+    if (window.confirm("可以看到正確解答，需要加時 40 分鐘！\n是否要觀看？")) {
+      getLevelAnswerProcess();
+      return true;
+    }
+  } else {
+    if (window.confirm("查看這個提示需要加時 10 秒鐘！\n是否要觀看？")) {
+      getHintProcess(to.params.hintId);
+      return true;
+    }
+  }
+  return false;
+});
 </script>
 
 <template>
@@ -21,14 +43,14 @@ const mockdata = {
     <div class="flex items-center justify-center pt-10">
       <div class="flex flex-col items-center gap-5">
         <router-link
-          v-for="(value, index) in mockdata.hints"
-          to="/hint"
+          v-for="(value, index) in levelStatus.hints"
+          :to="`/hint/${value}`"
           :key="value"
           replace
         >
           <HintChoice :text="`提示 ${index + 1}`" />
         </router-link>
-        <router-link to="/hint" replace>
+        <router-link to="/hint/level-answer" replace>
           <HintChoice text="看答案" />
         </router-link>
       </div>

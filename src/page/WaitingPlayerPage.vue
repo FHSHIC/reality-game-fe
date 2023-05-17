@@ -1,10 +1,11 @@
 <script setup>
-import { reactive, onBeforeUnmount } from "vue";
+import { reactive, onBeforeUnmount, onErrorCaptured } from "vue";
 import { useRoute } from "vue-router";
 import {
   waitMember,
   gameStartProcess,
   gameEndProcess,
+  getTeamStatusProcess,
 } from "../utils/process.js";
 import {
   getUserStatusFromStorage,
@@ -33,6 +34,13 @@ onBeforeUnmount(() => {
       },
     })
   );
+});
+
+onErrorCaptured(() => {
+  if (!waitStatus.teamName) {
+    getTeamStatusProcess(teamStatus.gamecode, false);
+    waitStatus.teamName = getTeamStatusFromStorage().teamName;
+  }
 });
 </script>
 

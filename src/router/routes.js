@@ -83,7 +83,7 @@ export const routes = [
     component: HintChoicePage,
   },
   {
-    path: "/hint",
+    path: "/hint/:hintId",
     component: HintDetailPage,
   },
   {

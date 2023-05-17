@@ -41,9 +41,49 @@ export const getDramaContentFromIndexedDB = async (level) => {
   return levelDrama;
 };
 
-// export const dialogSpeak = reactive({
-//   speaker: "",
-//   speach: "",
-//   speakerImage: "",
-//   isAllPage: false,
-// });
+export const updateLevelStatusToStorage = (levelData) => {
+  localStorage.setItem("levelStatus", JSON.stringify(levelData));
+};
+
+export const getLevelStatusFromStorage = () => {
+  return JSON.parse(localStorage.getItem("levelStatus"));
+};
+
+export const removeLevelStatusFromStorage = () => {
+  localStorage.removeItem("levelStatus");
+};
+
+export const updateAllHintGotToStorage = (hintId) => {
+  const allHintGot = JSON.parse(localStorage.getItem("allHintGot"));
+  if (!allHintGot) {
+    const tmpHintGot = [];
+    tmpHintGot.push(hintId);
+    localStorage.setItem("allHintGot", JSON.stringify(tmpHintGot));
+    return;
+  }
+  allHintGot.push(hintId);
+  localStorage.setItem("allHintGot", JSON.stringify(allHintGot));
+};
+
+export const getAllHintGotFromStorage = () => {
+  return JSON.parse(localStorage.getItem("allHintGot"));
+};
+
+export const updateHintByIdToStorage = (hintId, hintContent) => {
+  localStorage.setItem(hintId, hintContent);
+};
+
+export const getHintByIdFromStorage = (hintId) => {
+  return localStorage.getItem(hintId);
+};
+
+export const clearHintFromStorage = () => {
+  const hintList = JSON.parse(localStorage.getItem("allHintGot"));
+  if (!hintList) {
+    return;
+  }
+  hintList.forEach((hint) => {
+    localStorage.removeItem(hint);
+  });
+  localStorage.removeItem("allHintGot");
+};

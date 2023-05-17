@@ -1,13 +1,11 @@
 <script setup>
 import { useRoute } from "vue-router";
-import { getTeamStatusProcess } from "../utils/process.js";
+import { clearanceProcess } from "../utils/process.js";
 
 const route = useRoute();
 const gamecode = route.params.gamecode;
 
-setTimeout(() => {
-  getTeamStatusProcess(gamecode);
-}, 500);
+setTimeout(clearanceProcess, 500);
 </script>
 
 <template>
@@ -21,7 +19,7 @@ setTimeout(() => {
         <div></div>
         <div></div>
       </div>
-      <p class="text-xl text-white">正在檢查您的團隊資料......</p>
+      <p class="text-xl text-white">正在檢查您的遊戲結束資料......</p>
       <p class="text-xl text-white">請保持您的網路通暢！</p>
     </div>
   </div>
