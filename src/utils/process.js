@@ -52,29 +52,6 @@ export const getDrama = () => {
       await set(`level${data.level}`, data, customStore);
     })
   );
-
-  // dramas.forEach((file) => {
-  //   fetch(file)
-  //     .then((res) => {
-  //       return res.json();
-  //     })
-  //     .then((data) => {
-  //       console.log(data);
-  //       get(`${file.split(".")[0].split("_")[1]}`, customStore).then(
-  //         (exist) => {
-  //           console.log(exist);
-  //           if (exist) {
-  //             if (data.digest === exist.digest) {
-  //               return;
-  //             }
-
-  //             del(`level${data.level}`, customStore);
-  //           }
-  //           set(`level${data.level}`, data, customStore);
-  //         }
-  //       );
-  //     });
-  // });
 };
 
 export const loginProcess = async (email, password) => {

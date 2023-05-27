@@ -6,8 +6,6 @@ import { getTeamStatusFromStorage } from "../utils/status";
 
 const router = useRouter();
 
-// getDrama();
-
 onMounted(async () => {
   await getDrama();
   setTimeout(() => {
@@ -15,39 +13,6 @@ onMounted(async () => {
       path: `/dialog/${getTeamStatusFromStorage().nowLevel}/0/0`,
     });
   }, 2000);
-
-  // const levelKeys = [
-  //   "level1",
-  //   "level2",
-  //   "level3",
-  //   "level4",
-  //   "level5",
-  //   "level6",
-  // ];
-  // let allSet = true;
-  // levelKeys.forEach(async (levelKey) => {
-  //   const exist = await checkExist(levelKey);
-  //   if (!exist) {
-  //     allSet = false;
-  //     return;
-  //   }
-  // });
-  // if (!allSet) {
-  //   getDrama().then(() => {
-  //     router.replace("/login");
-  //   });
-  // } else {
-  //   setTimeout(() => {
-  //     router.replace({
-  //       path: "/dialog",
-  //       query: {
-  //         level: 1,
-  //         dramaSeq: 0,
-  //         dialogSeq: 0,
-  //       },
-  //     });
-  //   }, 500);
-  // }
 });
 </script>
 
