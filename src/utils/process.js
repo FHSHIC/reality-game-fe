@@ -22,7 +22,7 @@ const req = axios.create({
 
 const websocketEndpoint = "wss://reality-game.fhsh.tp.edu.tw/api/team/waiting";
 
-export const getDrama = async () => {
+export const getDrama = () => {
   const dramas = [
     "/dramaDB_level1.json",
     "/dramaDB_level2.json",
@@ -32,21 +32,49 @@ export const getDrama = async () => {
     "/dramaDB_level6.json",
   ];
 
-  dramas.forEach(async (file) => {
-    const res = await fetch(file);
-    const data = await res.json();
+  return Promise.all(
+    dramas.map(async (file) => {
+      const res = await fetch(file);
+      const data = await res.json();
 
-    const exist = await get(`${file.split(".")[0].split("_")[1]}`, customStore);
-    if (exist) {
-      if (data.digest === exist.digest) {
-        return;
+      const exist = await get(
+        `${file.split(".")[0].split("_")[1]}`,
+        customStore
+      );
+      if (exist) {
+        if (data.digest === exist.digest) {
+          return;
+        }
+
+        await del(`level${data.level}`, customStore);
       }
 
-      del(`level${data.level}`, customStore);
-    }
+      await set(`level${data.level}`, data, customStore);
+    })
+  );
 
-    set(`level${data.level}`, data, customStore);
-  });
+  // dramas.forEach((file) => {
+  //   fetch(file)
+  //     .then((res) => {
+  //       return res.json();
+  //     })
+  //     .then((data) => {
+  //       console.log(data);
+  //       get(`${file.split(".")[0].split("_")[1]}`, customStore).then(
+  //         (exist) => {
+  //           console.log(exist);
+  //           if (exist) {
+  //             if (data.digest === exist.digest) {
+  //               return;
+  //             }
+
+  //             del(`level${data.level}`, customStore);
+  //           }
+  //           set(`level${data.level}`, data, customStore);
+  //         }
+  //       );
+  //     });
+  // });
 };
 
 export const loginProcess = async (email, password) => {

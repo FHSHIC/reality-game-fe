@@ -9,13 +9,13 @@ const router = useRouter();
 // getDrama();
 
 onMounted(async () => {
-  getDrama().then(() => {
-    setTimeout(() => {
-      router.replace({
-        path: `/dialog/${getTeamStatusFromStorage().nowLevel}/0/0`,
-      });
-    }, 500);
-  });
+  await getDrama();
+  setTimeout(() => {
+    router.replace({
+      path: `/dialog/${getTeamStatusFromStorage().nowLevel}/0/0`,
+    });
+  }, 2000);
+
   // const levelKeys = [
   //   "level1",
   //   "level2",
