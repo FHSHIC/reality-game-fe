@@ -1,4 +1,6 @@
 <script setup>
+import { clearanceProcess } from "../utils/process.js";
+
 import Botton from "../components/Botton.vue";
 
 import title from "../assets/Title.png";
@@ -21,7 +23,12 @@ import congratulation from "../assets/Congratulation.png";
       <div class="flex justify-center">
         <div class="absolute top-[500px]">
           <router-link to="/start">
-            <Botton text="繼續" class="" BackgroundColor="#F6C4C7" @click="" />
+            <Botton
+              text="繼續"
+              class=""
+              BackgroundColor="#F6C4C7"
+              @click="clearanceProcess"
+            />
           </router-link>
         </div>
       </div>

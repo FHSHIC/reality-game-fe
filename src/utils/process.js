@@ -474,7 +474,7 @@ export const checkAnswerProcess = async (answer) => {
       {
         gamecode: teamStatus.gamecode,
         levelId: dramaContent.levelId,
-        answer,
+        answer: answer.trim(),
       },
       {
         headers: {

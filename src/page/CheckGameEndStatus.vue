@@ -1,11 +1,13 @@
 <script setup>
-import { useRoute } from "vue-router";
-import { clearanceProcess } from "../utils/process.js";
+import { useRoute, useRouter } from "vue-router";
 
 const route = useRoute();
+const router = useRouter();
 const gamecode = route.params.gamecode;
 
-setTimeout(clearanceProcess, 500);
+setTimeout(() => {
+  router.replace("/clearance");
+}, 500);
 </script>
 
 <template>

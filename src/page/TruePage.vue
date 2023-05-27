@@ -12,10 +12,14 @@ import Gap from "../components/Gap.vue";
 const router = useRouter();
 
 getTeamStatusProcess(getTeamStatusFromStorage().gamecode, false);
+const teamStatus = getTeamStatusFromStorage();
 
 const goToNextScene = async () => {
+  // 技術債區
+
+  // normal
   router.replace({
-    path: `/dialog/${getTeamStatusFromStorage().nowLevel}/1/0`,
+    path: `/dialog/${teamStatus.nowLevel}/1/0`,
   });
 };
 </script>
