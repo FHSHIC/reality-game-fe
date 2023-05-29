@@ -7,10 +7,7 @@ const route = useRoute();
 const router = useRouter();
 const gamecode = route.query.gamecode;
 
-Promise.all([
-  getTeamStatusProcess(getTeamStatusFromStorage().gamecode),
-  false,
-]).then(() => {
+Promise.all([getTeamStatusProcess(gamecode), false]).then(() => {
   setTimeout(() => {
     router.replace("/clearance");
   }, 1000);
