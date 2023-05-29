@@ -1,11 +1,17 @@
 <script setup>
-import { clearanceProcess } from "../utils/process.js";
+import { reactive } from "vue";
+import { clearanceProcess, getTeamStatusProcess } from "../utils/process.js";
+import { getTeamStatusFromStorage } from "../utils/status";
 
 import Botton from "../components/Botton.vue";
 
 import title from "../assets/Title.png";
 import character from "../assets/character.png";
 import congratulation from "../assets/Congratulation.png";
+
+const team = reactive({
+  status: null,
+});
 </script>
 
 <template>

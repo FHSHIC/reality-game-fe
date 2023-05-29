@@ -19,7 +19,7 @@ onBeforeRouteLeave((to, from) => {
   if (to.fullPath === "/answer") {
     return true;
   }
-  if (to.params.hintId === "level-answer") {
+  if (to.params.hintId === levelStatus.hints[levelStatus.hints.length - 1]) {
     if (window.confirm("可以看到正確解答，需要加時 40 分鐘！\n是否要觀看？")) {
       getLevelAnswerProcess();
       return true;
@@ -46,11 +46,15 @@ onBeforeRouteLeave((to, from) => {
           v-for="(value, index) in levelStatus.hints"
           :to="`/hint/${value}`"
           :key="value"
+          v-if="index !== levelStatus.hints.length - 1"
           replace
         >
           <HintChoice :text="`提示 ${index + 1}`" />
         </router-link>
-        <router-link to="/hint/level-answer" replace>
+        <router-link
+          :to="`/hint/${levelStatus.hints[levelStatus.hints.length - 1]}`"
+          replace
+        >
           <HintChoice text="看答案" />
         </router-link>
       </div>

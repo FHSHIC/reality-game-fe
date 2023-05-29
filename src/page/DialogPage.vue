@@ -85,6 +85,8 @@ onErrorCaptured(async (e) => {
       'puzzle-bg04': dramaStatus.level === '4',
       'puzzle-bg05': dramaStatus.level === '5',
       'last-image': dramaStatus.level === '6',
+      'last-thx-image':
+        dramaStatus.level === '6' && dramaStatus.dialogSeq === '5',
     }"
     @click="changeDialogProcess(dramaStatus.dramaSeq, dramaStatus.dialogSeq)"
   >
@@ -120,5 +122,9 @@ onErrorCaptured(async (e) => {
 
 .last-image {
   background-image: url("../assets/lastImage.jpg");
+}
+
+.last-thx-image {
+  background-image: url("../assets/13.png");
 }
 </style>

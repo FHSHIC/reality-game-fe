@@ -11,7 +11,6 @@ import {
   getUserStatusFromStorage,
   getTeamStatusFromStorage,
   waitStatus,
-  delTeamStatusFromStorage,
 } from "../utils/status.js";
 
 import WaitingPlayer from "../components/WaitingPlayer.vue";

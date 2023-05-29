@@ -339,6 +339,9 @@ export const gameEndProcess = async () => {
     );
     router.replace({
       path: "/check-game-end",
+      query: {
+        gamecode: teamStatus.gamecode,
+      },
     });
   } catch (e) {
     console.log(e);

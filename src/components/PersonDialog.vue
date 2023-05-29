@@ -16,7 +16,7 @@ const teamStatus = getTeamStatusFromStorage();
     <div
       class="absolute"
       :class="{
-        'top-16': teamStatus.nowLevel === 6,
+        'top-8': teamStatus.nowLevel === 6,
         'bottom-16': teamStatus !== 6,
       }"
     >

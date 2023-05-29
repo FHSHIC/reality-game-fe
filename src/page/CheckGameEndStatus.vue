@@ -1,13 +1,20 @@
 <script setup>
 import { useRoute, useRouter } from "vue-router";
+import { getTeamStatusFromStorage } from "../utils/status";
+import { getTeamStatusProcess } from "../utils/process";
 
 const route = useRoute();
 const router = useRouter();
-const gamecode = route.params.gamecode;
+const gamecode = route.query.gamecode;
 
-setTimeout(() => {
-  router.replace("/clearance");
-}, 500);
+Promise.all([
+  getTeamStatusProcess(getTeamStatusFromStorage().gamecode),
+  false,
+]).then(() => {
+  setTimeout(() => {
+    router.replace("/clearance");
+  }, 1000);
+});
 </script>
 
 <template>

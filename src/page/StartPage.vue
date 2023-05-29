@@ -19,8 +19,17 @@ const userStatus = getUserStatusFromStorage();
     </div>
     <div class="flex flex-col items-center justify-center gap-6 pt-6">
       <SakuraButton @click="toGameProcess">開始遊戲</SakuraButton>
-      <router-link to="/review" v-if="userStatus.gameHistory.length !== 0">
+      <router-link
+        to="/start"
+        v-if="userStatus.gameHistory.length !== 0"
+        class="relative"
+      >
         <SakuraButton>回顧</SakuraButton>
+        <div
+          class="absolute inset-0 flex h-full w-full items-center justify-center rounded-md bg-black/60"
+        >
+          <p class="-rotate-6 text-white">暫無開放</p>
+        </div>
       </router-link>
       <SakuraButton @click="logoutProcess">登出</SakuraButton>
     </div>
