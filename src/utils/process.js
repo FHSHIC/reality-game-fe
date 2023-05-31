@@ -14,6 +14,7 @@ import {
   updateAllHintGotToStorage,
   updateHintByIdToStorage,
   clearHintFromStorage,
+  removeLevelStatusFromStorage,
 } from "./status.js";
 
 const req = axios.create({
@@ -84,7 +85,13 @@ export const registProcess = async (email, username, password) => {
     updateUserStatusToStorage(res.data);
   } catch (e) {
     console.log(e);
-    alert("這個帳號已經被註冊過囉！");
+    if (e.response.status === 403) {
+      alert("這個帳號已經被註冊過囉！");
+    } else if (e.response.status === 400) {
+      alert("你的帳號、密碼及使用者名稱都不能留空");
+    } else {
+      alert("註冊系統出了點問題，請跟山城實境解謎團隊聯繫！");
+    }
     return;
   }
   // onsuccess
@@ -361,6 +368,7 @@ export const clearanceProcess = () => {
   clear(customStore);
   getCurrentUserProcess(true);
   delTeamStatusFromStorage();
+  removeLevelStatusFromStorage();
   // onsuccess
   router.replace({
     path: "/start",
@@ -403,7 +411,7 @@ export const changeDialogProcess = async (dramaSeq, dialogSeq) => {
     router.replace({
       path: `/dialog/${teamStatus.nowLevel}/${dramaSeq}/${dialogSeq}`,
     });
-  } else if (teamStatus.nowLevel === 6) {
+  } else if ((teamStatus.nowLevel === 6) & (parseInt(dramaSeq) !== 1)) {
     toGameSettlement();
   } else if (parseInt(dramaSeq) === 1) {
     try {

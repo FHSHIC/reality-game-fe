@@ -53,7 +53,7 @@ onBeforeRouteLeave((to, from) => {
             v-if="index !== levelStatus.hints.length - 1"
           />
           <HintChoice
-            :text="看答案"
+            text="看答案"
             v-if="index === levelStatus.hints.length - 1"
           />
         </router-link>

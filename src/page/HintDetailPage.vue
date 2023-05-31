@@ -29,7 +29,7 @@ onMounted(() => {
     class="bg-monkey flex h-full w-full items-center justify-center bg-cover bg-center"
   >
     <div
-      class="flex h-80 w-[230px] flex-col items-center justify-between bg-black/70 px-2 py-6"
+      class="flex min-h-[20rem] w-[230px] flex-col items-center justify-between bg-black/70 px-2 py-6"
     >
       <p class="text-center text-2xl font-bold text-white">提示</p>
       <p class="text-center indent-2 text-lg text-white">
