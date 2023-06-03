@@ -1,6 +1,10 @@
 <script setup>
 import { reactive } from "vue";
-import { clearanceProcess, getTeamStatusProcess } from "../utils/process.js";
+import {
+  clearanceProcess,
+  getTeamStatusProcess,
+  timeSettle2FormatStringProcess,
+} from "../utils/process.js";
 import { getTeamStatusFromStorage } from "../utils/status";
 
 import Botton from "../components/Botton.vue";
@@ -9,35 +13,34 @@ import title from "../assets/Title.png";
 import character from "../assets/character.png";
 import congratulation from "../assets/Congratulation.png";
 
-const team = reactive({
-  status: null,
-});
+getTeamStatusProcess(getTeamStatusFromStorage().gamecode, false);
+
+const time = timeSettle2FormatStringProcess(
+  getTeamStatusFromStorage().startTime,
+  getTeamStatusFromStorage().endTime,
+  getTeamStatusFromStorage().extraTime
+);
 </script>
 
 <template>
   <div class="bg-Clear h-full w-full bg-cover bg-center bg-no-repeat">
-    <div class="flex justify-center">
-      <img :src="title" alt="" class="mb-4 mt-[50px] w-[270px]" />
+    <img :src="title" alt="" class="mx-auto w-[270px] pt-10" />
+    <div class="relative pb-4">
+      <img :src="character" alt="" class="mx-auto w-[300px] pt-4" />
+      <img :src="congratulation" alt="" class="absolute -bottom-20" />
     </div>
-    <div class="flex justify-center">
-      <img :src="character" alt="" class="relative w-[300px] pt-[15px]" />
+    <div class="py-16">
+      <p class="text-center text-xl">{{ time }}</p>
     </div>
-    <div class="flex flex-col justify-center">
-      <div class="absolute top-[390px]">
-        <img :src="congratulation" alt="" class="" />
-      </div>
-      <div class="flex justify-center">
-        <div class="absolute top-[500px]">
-          <router-link to="/start">
-            <Botton
-              text="繼續"
-              class=""
-              BackgroundColor="#F6C4C7"
-              @click="clearanceProcess"
-            />
-          </router-link>
-        </div>
-      </div>
+    <div class="flex items-center justify-center">
+      <router-link to="/start">
+        <Botton
+          text="繼續"
+          class=""
+          BackgroundColor="#F6C4C7"
+          @click="clearanceProcess"
+        />
+      </router-link>
     </div>
   </div>
 </template>

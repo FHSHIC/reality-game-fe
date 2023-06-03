@@ -273,6 +273,9 @@ export const waitMember = async (waitState) => {
       if (rtData.isEnd) {
         router.replace({
           path: "/check-game-end",
+          query: {
+            gamecode: teamStatus.gamecode,
+          },
         });
       }
     }
@@ -366,9 +369,9 @@ export const clearanceProcess = () => {
   // TODO: clear drama db
   // update team state, update user game history
   clear(customStore);
-  getCurrentUserProcess(true);
   delTeamStatusFromStorage();
   removeLevelStatusFromStorage();
+  getCurrentUserProcess(true);
   // onsuccess
   router.replace({
     path: "/start",
@@ -529,4 +532,19 @@ export const getLevelContentProcess = async () => {
   } catch (e) {
     console.log(e);
   }
+};
+
+export const timeSettle2FormatStringProcess = (
+  startTime,
+  endTime,
+  extraTime
+) => {
+  const spending = endTime - startTime + extraTime;
+  const sec = (Math.floor(spending / 1000) % 60).toString();
+  const min = (Math.floor(Math.floor(spending / 1000) / 60) % 60).toString();
+  const hour = Math.floor(
+    Math.floor(Math.floor(spending / 1000) / 60) / 60
+  ).toString();
+
+  return `${hour} 小時 ${min.padStart(2, "0")} 分 ${sec.padStart(2, "0")} 秒`;
 };

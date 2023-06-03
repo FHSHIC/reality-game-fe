@@ -29,7 +29,7 @@ const team = reactive({
     </div>
 
     <p class="pb-10 pt-6 text-center text-lg font-black text-[#5E4C40]">
-      恭喜你擔任隊長，幫大家取個名字吧！
+      恭喜你擔任隊長，幫大家取個名字吧！（限 6 字）
     </p>
     <div class="flex justify-center">
       <Botton

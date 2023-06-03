@@ -49,7 +49,7 @@ const regist = reactive({
         type="text"
         :img="lock"
         v-model="regist.username"
-        placeholder="請輸入遊戲暱稱"
+        placeholder="請輸入遊戲暱稱（限 10 字）"
       />
       <div class="flex flex-col items-center justify-center gap-6">
         <SakuraButton
