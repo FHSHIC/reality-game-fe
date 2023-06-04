@@ -187,6 +187,9 @@ export const useGameCodeProcess = async (gamecode) => {
     if (errorRes.status === 404) {
       alert("你不能使用這個遊戲碼，請跟山城實境解謎團隊聯繫！");
       return;
+    } else if (errorRes.status === 451) {
+      alert("使用人數超過上限喔！最大遊戲人數為 4 人喔！");
+      return;
     } else {
       alert("這個遊戲碼已經被使用過了！請跟山城實境解謎團隊聯繫！");
       return;
